@@ -2,6 +2,10 @@
 
 Minimal HTML frontend connected to a native **C / POSIX pthreads HTTP backend**.
 
+**Live application:** https://pranav-banking-atm.onrender.com/
+
+**Source repository:** https://github.com/pranavkoushik0606-code/banking-atm-os-assignment
+
 Prepared for Pranav Koushik L, 24ETCS002142, CSC304A Operating Systems.
 
 ## Run locally (Linux, macOS with Linux container, or Windows WSL)
