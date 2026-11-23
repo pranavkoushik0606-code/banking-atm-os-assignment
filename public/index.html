@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Multithreaded Banking and ATM application using C and POSIX threads.">
+  <title>Banking & ATM | OS Assignment</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <div><p class="eyebrow">OPERATING SYSTEMS · CSC304A</p><h1>Banking & ATM</h1><p class="subtitle">Multithreaded transactions, made visible.</p></div>
+      <span id="connection" class="connection">Connecting to C backend…</span>
+    </header>
+
+    <section class="accounts" aria-label="Account balances">
+      <article class="account"><p>ACCOUNT 101</p><h2 id="balance-101">—</h2><span>ATM & online banking</span></article>
+      <article class="account"><p>ACCOUNT 102</p><h2 id="balance-102">—</h2><span>ATM & online banking</span></article>
+      <article class="account total"><p>COMBINED BALANCE</p><h2 id="total">—</h2><span>Consistent, locked snapshot</span></article>
+    </section>
+
+    <div class="workspace">
+      <section class="panel">
+        <div class="section-title"><h2>New transaction</h2><button class="text-button" id="refresh" type="button">Refresh balances</button></div>
+        <form id="transaction-form">
+          <label for="operation">Operation</label>
+          <select id="operation" name="operation"><option value="deposit">Deposit</option><option value="withdraw">Withdraw</option><option value="enquiry">Balance enquiry</option><option value="transfer">Fund transfer</option></select>
+          <div class="form-row">
+            <div><label for="account">From / account</label><select id="account" name="account"><option value="101">Account 101</option><option value="102">Account 102</option></select></div>
+            <div><label for="channel">Channel</label><select id="channel" name="channel"><option value="Online-Web">Online banking</option><option value="ATM-01">ATM 01</option><option value="ATM-02">ATM 02</option><option value="Mobile-UPI">Mobile / UPI</option></select></div>
+          </div>
+          <div id="target-field" hidden><label for="target">To account</label><select id="target" name="target"><option value="102">Account 102</option><option value="101">Account 101</option></select></div>
+          <div id="amount-field"><label for="amount">Amount (₹)</label><input id="amount" name="amount" type="number" min="0.01" max="1000000" step="0.01" value="1000" required inputmode="decimal"></div>
+          <button class="primary" id="submit" type="submit" disabled>Execute transaction</button>
+        </form>
+        <p id="transaction-status" class="message" role="status" aria-live="polite">Waiting for the backend.</p>
+        <div class="reset-row"><span>Each browser has its own demo accounts.</span><button id="reset" class="text-button" type="button" disabled>Reset accounts</button></div>
+      </section>
+
+      <section class="panel">
+        <h2>Concurrency lab</h2>
+        <p class="description">Run real pthread workers on isolated accounts. Your balances above stay unchanged.</p>
+        <div class="demo-list">
+          <div><div><h3>Race condition</h3><p>10 deposits without locks. Observe lost updates.</p></div><button class="demo" data-demo="race" disabled>Run unsafe</button></div>
+          <div><div><h3>Mutex protection</h3><p>The same 10 deposits with per-account mutexes.</p></div><button class="demo" data-demo="safe" disabled>Run safe</button></div>
+          <div><div><h3>Deadlock-free transfers</h3><p>100 opposing transfers, locks ordered by account ID.</p></div><button class="demo" data-demo="transfer" disabled>Run transfers</button></div>
+          <div><div><h3>Assignment workload</h3><p>The PDF’s eight ATM and online transactions.</p></div><button class="demo" data-demo="assignment" disabled>Run assignment</button></div>
+        </div>
+        <p id="demo-status" class="message" role="status" aria-live="polite">Select a scenario to view the results.</p>
+      </section>
+    </div>
+
+    <section class="panel audit-panel">
+      <div class="section-title"><div><h2>Transaction log</h2><p class="description">Receipts returned by the C backend.</p></div><button class="text-button" id="clear" type="button">Clear view</button></div>
+      <pre id="audit" aria-label="Transaction audit log" tabindex="0">Ready. Connect to the backend to begin.</pre>
+    </section>
+    <footer><span>Pranav Koushik L · 24ETCS002142</span><span>C · POSIX pthreads · HTML</span></footer>
+    <p class="footnote">Academic simulation using fictional balances. Balances are stored in memory and reset when the server restarts.</p>
+  </main>
+</body>
+</html>
