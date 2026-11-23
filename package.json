@@ -1,0 +1,5 @@
+{
+  "name": "banking-atm-c",
+  "private": true,
+  "scripts": {"dev": "make all && ./build/banking_server public"}
+}

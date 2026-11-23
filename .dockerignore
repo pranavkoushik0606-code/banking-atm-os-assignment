@@ -1,0 +1,9 @@
+.git
+.openai
+.env*
+build
+__pycache__
+*.zip
+*.log
+tests
+docs
